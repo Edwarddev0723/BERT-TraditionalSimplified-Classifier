@@ -6,6 +6,12 @@ Modular, installable, and testable project for classifying Traditional Chinese t
 - Python: 3.10
 - License: Apache-2.0
 
+## Pretrained Model (Hugging Face)
+
+Model card and weights:
+
+- https://huggingface.co/renhehuang/bert-traditional-chinese-classifier
+
 ## Quick Start
 
 1) Install and set up environment
