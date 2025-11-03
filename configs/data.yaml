@@ -1,0 +1,7 @@
+# Data configuration
+train_path: data/train.jsonl
+val_path: data/val.jsonl
+batch_size: 16
+num_workers: 2
+max_len: 256
+seed: 42

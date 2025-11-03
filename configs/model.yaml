@@ -1,0 +1,6 @@
+# Model configuration
+model_name: ckiplab/bert-base-chinese
+num_labels: 2
+dropout: 0.1
+use_transformers: true
+use_focal_loss: false

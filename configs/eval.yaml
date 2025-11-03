@@ -1,0 +1,18 @@
+# Evaluation config
+output_dir: runs/eval
+weights: runs/train/model.pt
+
+data:
+  val_path: data/val.jsonl
+  train_path: data/train.jsonl
+  batch_size: 16
+  num_workers: 2
+  max_len: 128
+  seed: 42
+
+model:
+  model_name: ckiplab/bert-base-chinese
+  num_labels: 2
+  dropout: 0.1
+  use_transformers: true
+  use_focal_loss: false
