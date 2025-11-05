@@ -35,7 +35,14 @@ class SimpleClassifier(nn.Module):
 
     def forward(self, input_ids: torch.Tensor, attention_mask: torch.Tensor | None = None, labels: torch.Tensor | None = None):
         x = self.embed(input_ids)
-        x = x.mean(dim=1)
+
+        if attention_mask is not None:
+            expanded_mask = attention_mask.unsqueeze(-1).expand(x.size()).float()
+            x = x * expanded_mask
+            x = x.sum(dim=1) / (expanded_mask.sum(dim=1) + 1e-9)
+        else:
+            x = x.mean(dim=1)
+
         logits = self.classifier(x)
         loss = None
         if labels is not None:
@@ -81,7 +88,7 @@ class BertClassifier(nn.Module):
             pooled = out.last_hidden_state[:, 0]
             logits = self.classifier(self.dropout(pooled))
         else:
-            model_out = self.classifier(input_ids)
+            model_out = self.classifier(input_ids, attention_mask=attention_mask)
             logits = model_out["logits"]
 
         loss = None
